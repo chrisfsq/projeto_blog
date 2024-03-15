@@ -1,9 +1,17 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const port = 3000;
 
+app.set('view engine', 'ejs');
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extends: false }));
+app.use(bodyParser.json());
+
+
 app.get('/', (req, res) => {
-    res.send("Olá mundo")
+    res.render('index')
 })
 
 
@@ -16,5 +24,5 @@ app.get('/', (req, res) => {
 
 
 app.listen(port, () => {
-    console.log("Server running")
+    console.log("Server running on port " + port)
 });
