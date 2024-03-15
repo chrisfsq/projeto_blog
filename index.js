@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const port = 3000;
+const connection = require('./database/connection')
 
 app.set('view engine', 'ejs');
 
@@ -14,7 +15,14 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
-
+connection
+.authenticate()
+.then(() => {  
+    console.log('Database connected sucessfuly!')
+})
+.catch(() => {
+    console.log('Failed connect to database.')
+});
 
 
 
